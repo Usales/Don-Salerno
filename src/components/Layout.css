@@ -510,6 +510,51 @@
   border-left: 1px solid var(--border);
 }
 
+/* Conta — abas Entrar / Cadastro (segmento tipo apps de delivery) */
+.conta-auth__tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  margin: 0 0 1.25rem;
+  background: var(--bg-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.conta-auth__tab {
+  flex: 1;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius-lg) - 3px);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.conta-auth__tab:hover {
+  color: var(--text);
+}
+
+.conta-auth__tab.is-active {
+  color: var(--text);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.conta-auth__tab:focus-visible {
+  outline: var(--foco);
+  outline-offset: 2px;
+}
+
 /* Wrapper só organiza o grid; sem caixa própria (fundo vem do main) */
 .menu-panel {
   background: transparent;

@@ -48,13 +48,29 @@ export function Conta() {
 
   if (!usuario) {
     return (
-      <div className="container" style={{ padding: '2rem 1rem', maxWidth: 480 }}>
+      <div className="container conta-auth" style={{ padding: '2rem 1rem', maxWidth: 480 }}>
         <h1 style={{ fontSize: '2rem' }}>Minha conta</h1>
-        <div className="tabs" style={{ marginBottom: '1rem' }}>
-          <button type="button" className={modo === 'login' ? 'is-active' : ''} onClick={() => setModo('login')}>
+        <div className="conta-auth__tabs" role="tablist" aria-label="Entrar ou cadastrar">
+          <button
+            type="button"
+            role="tab"
+            id="conta-tab-login"
+            aria-selected={modo === 'login'}
+            aria-controls="conta-auth-panel"
+            className={`conta-auth__tab${modo === 'login' ? ' is-active' : ''}`}
+            onClick={() => setModo('login')}
+          >
             Entrar
           </button>
-          <button type="button" className={modo === 'cadastro' ? 'is-active' : ''} onClick={() => setModo('cadastro')}>
+          <button
+            type="button"
+            role="tab"
+            id="conta-tab-cadastro"
+            aria-selected={modo === 'cadastro'}
+            aria-controls="conta-auth-panel"
+            className={`conta-auth__tab${modo === 'cadastro' ? ' is-active' : ''}`}
+            onClick={() => setModo('cadastro')}
+          >
             Cadastro
           </button>
         </div>
@@ -63,6 +79,11 @@ export function Conta() {
             {erro}
           </p>
         )}
+        <div
+          id="conta-auth-panel"
+          role="tabpanel"
+          aria-labelledby={modo === 'login' ? 'conta-tab-login' : 'conta-tab-cadastro'}
+        >
         {modo === 'login' ? (
           <form onSubmit={handleLogin}>
             <label htmlFor="em" style={{ display: 'block', fontWeight: 600 }}>
@@ -112,6 +133,7 @@ export function Conta() {
             </button>
           </form>
         )}
+        </div>
         <p style={{ marginTop: '1rem' }}>
           <Link to="/privacidade">Política de privacidade</Link>
         </p>

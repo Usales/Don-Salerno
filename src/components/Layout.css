@@ -555,6 +555,11 @@
   outline-offset: 2px;
 }
 
+/* Cardápio — swipe horizontal entre categorias (touch); pan-y preserva scroll vertical */
+.cardapio-swipe {
+  touch-action: pan-y;
+}
+
 /* Wrapper só organiza o grid; sem caixa própria (fundo vem do main) */
 .menu-panel {
   background: transparent;

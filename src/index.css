@@ -125,6 +125,37 @@ a:hover {
   padding: 2rem 0 3rem;
 }
 
+.sobre-page h1 {
+  margin-bottom: 1rem;
+}
+
+.sobre-page h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.35rem;
+}
+
+.sobre-page p {
+  margin: 0 0 1rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.sobre-page__lista {
+  margin: 0 0 1.25rem;
+  padding-left: 1.35rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.sobre-page__lista li {
+  margin-bottom: 0.4rem;
+}
+
+.sobre-page__lista li::marker {
+  color: var(--brand);
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

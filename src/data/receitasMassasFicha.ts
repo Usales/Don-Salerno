@@ -20,6 +20,8 @@ const ORDEM_PROCESSO = [
   'mix_detroit',
   'descanso_dobras',
   'mistura',
+  /** Só NY Style: fermentação em bloco (ambiente) antes da divisão — ordem Mistura → Fermentação → Divisão. */
+  'fermentacao_fria_bloco',
   'sova_curta',
   'desenvolvimento',
   'sova',
@@ -50,6 +52,7 @@ const TITULO_PROCESSO: Record<string, string> = {
   mix_detroit: 'Mistura (simples, mas correta)',
   descanso_dobras: 'Desenvolvimento (descanso + dobras leves)',
   mistura: 'Mistura',
+  fermentacao_fria_bloco: 'Fermentação',
   sova_curta: 'Sova (curta e controlada)',
   desenvolvimento: 'Desenvolvimento (dobras — substitui sova)',
   sova: 'Sova',
@@ -214,10 +217,10 @@ export const fichasMassas: FichaMassa[] = [
   {
     nome: 'Pizza New York Style',
     origem: 'Nova York, EUA',
-    farinha: { tipo: 'Farinha de pão', proteina_percentual: '12–13%' },
+    farinha: { tipo: 'Farinha de trigo', proteina_percentual: '12–13%' },
     hidratacao: '65%',
     ingredientes: [
-      { item: 'Farinha de pão', quantidade: '1000 g' },
+      { item: 'Farinha de trigo', quantidade: '1000 g' },
       { item: 'Água', quantidade: '650 g' },
       { item: 'Sal', quantidade: '20 g' },
       { item: 'Açúcar', quantidade: '20 g' },
@@ -225,15 +228,23 @@ export const fichasMassas: FichaMassa[] = [
       { item: 'Azeite', quantidade: '30 g' },
     ],
     processo: {
-      mistura: 'Misturar tudo até formar massa.',
-      sova: '8–10 minutos.',
-      fermentacao: '24–72 h na geladeira.',
-      divisao: 'Bolas de 300 g.',
+      mistura:
+        'Na batedeira com gancho (ou à mão): misture o fermento seco com o açúcar e a farinha de trigo.\nEm seguida adicione o sal e misture com a água até a massa juntar.\nIncorpore o azeite por último e bata até ficar homogênea e lisa — sem superaquecer a massa.\n\n👉 Despeje a água aos poucos e misture em velocidade baixa para controlar o ponto.',
+      fermentacao_fria_bloco:
+        'Mantenha a massa em bloco (ainda sem dividir) em recipiente fechado, com o fundo forrado em azeite de oliva, fora da geladeira, por 24 h. (Já pode ser usado.)\n\nApós esse período de 24 h de fermentação, leve à geladeira por mais 28–48 h e, em seguida, utilize a massa — isso serve para desenvolver maciez e sabor.\n\n👉 Controle temperatura ambiente (ideal ~20–24 °C). O azeite no fundo evita que a massa grude e ajuda na textura.',
+      divisao:
+        'Retire a massa (da geladeira, se fez o repouso extra de 28–48 h, ou use direto após as 24 h em ambiente, se preferir) e divida em bolas de ~300 g.\nAcomode as bolas no recipiente e deixe descansar em temperatura ambiente até ficarem macias para abrir (cerca de 2–4 h), ou mantenha tampado conforme seu planejamento.\n\n👉 Deixe folga entre as bolas; o fundo deve ficar levemente coberto de azeite.',
       forno: '260 °C por 10–15 min.',
     },
     resumo:
-      'Massa do estilo fatia grande: açúcar e azeite ajudam cor em forno doméstico; fermentação fria longa desenvolve sabor.',
-    topicos: ['65% hidratação', 'Bread flour', '24–72 h frio', 'Bola 300 g', '260 °C'],
+      'Massa do estilo fatia grande: açúcar e azeite ajudam cor em forno doméstico; fermentação em bloco (24 h fora da geladeira + 28–48 h em frio, fundo em azeite) desenvolve maciez e sabor.',
+    topicos: [
+      '65% hidratação',
+      'Farinha de trigo (12–13% proteína)',
+      '24 h ambiente + 28–48 h geladeira (bloco)',
+      'Bola 300 g',
+      '260 °C',
+    ],
   },
   {
     nome: 'Pizza Chicago Deep Dish',

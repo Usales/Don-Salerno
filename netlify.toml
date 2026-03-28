@@ -4,3 +4,24 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Alinhado a public/_redirects — garante SPA e redirecionamentos mesmo se _redirects não for copiado
+[[redirects]]
+  from = "/cardapio/massas"
+  to = "/cardapio/pizzas"
+  status = 301
+
+[[redirects]]
+  from = "/cardapio/molhos"
+  to = "/cardapio/pizzas"
+  status = 301
+
+[[redirects]]
+  from = "/cardapio/recheios"
+  to = "/cardapio/pizzas"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

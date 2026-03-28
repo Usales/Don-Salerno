@@ -8,6 +8,8 @@ import { useAuth } from '@/stores/useAuth'
 import { useCart } from '@/stores/useCart'
 import { useReviews } from '@/stores/useReviews'
 import type { TamanhoCodigo } from '@/types'
+import './Produto.css'
+
 function PassoTextoReceita({ texto }: { texto: string }) {
   const linhas = texto.split('\n')
   return (
@@ -215,9 +217,20 @@ export function Produto() {
           </Link>
         </div>
         {feedbackCarrinho ? (
-          <p style={{ margin: '0.75rem 0 0', color: 'var(--brand)', fontWeight: 600 }} role="status">
-            Adicionado ao carrinho.
-          </p>
+          <div className="produto-carrinho-toast" role="status" aria-live="polite">
+            <span className="produto-carrinho-toast__check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5 13l4 4L19 7"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <span className="produto-carrinho-toast__msg">Item adicionado ao carrinho.</span>
+          </div>
         ) : null}
       </section>
 

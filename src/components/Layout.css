@@ -317,7 +317,8 @@
 .site-footer__rule {
   height: 1px;
   background: var(--site-footer-line);
-  margin: 0;
+  margin-block: 3px;
+  flex-shrink: 0;
 }
 
 .site-footer__mid {

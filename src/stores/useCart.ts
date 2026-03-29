@@ -18,12 +18,17 @@ interface CupomAplicado {
   percentual: number
 }
 
+const OBSERVACAO_MAX_LEN = 2000
+
 interface CartState {
   itens: LinhaCarrinho[]
   cupomAplicado: CupomAplicado | null
+  observacaoPedido: string
   adicionar: (produto: Produto, tamanho: TamanhoCodigo) => void
   definirQuantidade: (linhaId: string, quantidade: number) => void
   remover: (linhaId: string) => void
+  limparCarrinho: () => void
+  definirObservacaoPedido: (texto: string) => void
   limparCupom: () => void
   aplicarCupom: (codigo: string) => { ok: boolean; mensagem?: string }
   sincronizarPrecos: () => void
@@ -50,6 +55,7 @@ export const useCart = create<CartState>()(
     (set, get) => ({
       itens: [],
       cupomAplicado: null,
+      observacaoPedido: '',
 
       adicionar: (produto, tamanho) => {
         const precoUnit = produto.precos[tamanho]
@@ -87,6 +93,11 @@ export const useCart = create<CartState>()(
       },
 
       remover: (linhaId) => set((s) => ({ itens: s.itens.filter((i) => i.id !== linhaId) })),
+
+      limparCarrinho: () => set({ itens: [], cupomAplicado: null, observacaoPedido: '' }),
+
+      definirObservacaoPedido: (texto) =>
+        set({ observacaoPedido: texto.slice(0, OBSERVACAO_MAX_LEN) }),
 
       limparCupom: () => set({ cupomAplicado: null }),
 

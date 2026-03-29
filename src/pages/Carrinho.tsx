@@ -11,24 +11,28 @@ export function Carrinho() {
 
   const {
     itens,
+    observacaoPedido,
     cupomAplicado,
     definirQuantidade,
     remover,
     aplicarCupom,
     limparCupom,
-    sincronizarPrecos,
+    limparCarrinho,
+    definirObservacaoPedido,
     subtotal,
     descontoValor,
     total,
   } = useCart(
     useShallow((s) => ({
       itens: s.itens,
+      observacaoPedido: s.observacaoPedido ?? '',
       cupomAplicado: s.cupomAplicado,
       definirQuantidade: s.definirQuantidade,
       remover: s.remover,
       aplicarCupom: s.aplicarCupom,
       limparCupom: s.limparCupom,
-      sincronizarPrecos: s.sincronizarPrecos,
+      limparCarrinho: s.limparCarrinho,
+      definirObservacaoPedido: s.definirObservacaoPedido,
       subtotal: s.subtotal,
       descontoValor: s.descontoValor,
       total: s.total,
@@ -51,10 +55,12 @@ export function Carrinho() {
     [aplicarCupom, cupomInput, limparCupom],
   )
 
-  const onAtualizar = useCallback(() => {
-    sincronizarPrecos()
-    setCupomMsg('Carrinho atualizado com os preços do cardápio.')
-  }, [sincronizarPrecos])
+  const onLimparCarrinho = useCallback(() => {
+    if (!window.confirm('Deseja remover todos os itens do carrinho?')) return
+    limparCarrinho()
+    setCupomInput('')
+    setCupomMsg(null)
+  }, [limparCarrinho])
 
   return (
     <div className="cart-page container">
@@ -167,6 +173,30 @@ export function Carrinho() {
             </table>
           </div>
 
+          <section className="cart-observacao-box" aria-labelledby="cart-observacao-titulo">
+            <h2 id="cart-observacao-titulo" className="cart-observacao-box__titulo">
+              Observações
+            </h2>
+            <p className="cart-observacao__help" id="cart-observacao-desc">
+              Comentários ou detalhes de como prefere o pedido (ex.: ponto da massa, ingredientes a retirar, bem
+              passada, horário de retirada).
+            </p>
+            <textarea
+              id="cart-observacao-textarea"
+              className="cart-observacao__textarea"
+              rows={6}
+              maxLength={2000}
+              value={observacaoPedido}
+              onChange={(e) => definirObservacaoPedido(e.target.value)}
+              placeholder="Descreva como prefere seu pedido."
+              aria-labelledby="cart-observacao-titulo"
+              aria-describedby="cart-observacao-desc"
+            />
+            <p className="cart-observacao__count" aria-live="polite">
+              {observacaoPedido.length}/2000
+            </p>
+          </section>
+
           <div className="cart-footer">
             <form className="cart-cupom" onSubmit={onAplicarCupom}>
               <label htmlFor="cart-cupom-input" className="visually-hidden">
@@ -193,8 +223,13 @@ export function Carrinho() {
             ) : null}
 
             <div className="cart-footer__actions">
-              <button type="button" className="btn btn--primario" onClick={onAtualizar}>
-                Atualizar carrinho
+              <button
+                type="button"
+                className="btn btn--primario"
+                onClick={onLimparCarrinho}
+                aria-label="Limpar carrinho"
+              >
+                Limpar carrinho
               </button>
               <Link to="/cardapio/pizzas" className="btn btn--primario cart-footer__link-btn">
                 Continuar comprando
